@@ -310,3 +310,98 @@ body {
     max-width: 120px;
   }
 }
+
+/* Added for search */
+/* Container */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end; /* CRITICAL: Aligns bottom of inputs and buttons */
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+/* Common item wrapper */
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The Search Group (Dropdown + Input joined) */
+.search-main {
+  flex-direction: row; /* Horizontal for the search bar part */
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  height: 42px; /* Fixed height for consistency */
+  padding: 0 4px;
+}
+
+.search-dropdown {
+  background: transparent;
+  color: #fff;
+  border: none;
+  border-right: 1px solid #333;
+  padding: 0 10px;
+  height: 100%;
+  outline: none;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 0 12px;
+  flex-grow: 1;
+  outline: none;
+}
+
+/* Date Labels */
+.date-field label {
+  color: #888;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 2px;
+}
+
+/* Date Inputs */
+.date-field input[type="date"] {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 42px; /* Matches the search bar height */
+  font-family: inherit;
+  outline: none;
+}
+
+/* Apply Button */
+.search-submit-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 20px;
+  height: 42px; /* Matches everything else */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-submit-btn:hover {
+  background: #0056b3;
+}
+
+/* Calendar icon styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}
