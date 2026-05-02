@@ -1,0 +1,302 @@
+/* Update these in your global or component CSS */
+.trip-container {
+  background-color: var(--lp-surface);
+  border: 1px solid var(--lp-border);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  color: var(--lp-text-main);
+  
+  /* CRITICAL: Allow it to shrink */
+  width: 100%;
+  max-width: 100%; 
+  min-width: 0; /* Resets any inherited minimums */
+  margin: 1rem auto;
+  box-sizing: border-box;
+}
+
+/* Ensure the body or parent wrapper isn't forcing a width */
+#root, .app-wrapper {
+  padding: 0 10px;
+  overflow-x: hidden; /* Prevents tiny sub-pixel scrolls */
+}
+
+:root {
+  /* Littlepay Dark Theme Palette */
+  --lp-bg-dark: #0f171a;         /* Deep charcoal background */
+  --lp-surface: #1a262b;        /* Elevated surface for cards/table */
+  --lp-jungle-green: #2BB088;    /* Main brand green */
+  --lp-blue-lagoon: #00728A;     /* Accent teal */
+  --lp-border: #2a3a41;          /* Subtle dark border */
+  --lp-text-main: #e2e8f0;       /* Light grey for readability */
+  --lp-text-muted: #94a3b8;     /* Muted text */
+  --lp-white: #ffffff;
+}
+/* 2. Tighten the table layout */
+.trip-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Change min-width to a lower value or remove it to let it shrink */
+  min-width: 100%; 
+  table-layout: auto; /* 'fixed' can sometimes cause headers to ignore content */
+}
+
+/* 3. Minimize cell padding */
+.trip-table th,
+.trip-table td {
+  color: var(--lp-blue-lagoon);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--lp-border);
+  padding: 15px 10px;
+}
+
+.trip-table th {
+  background-color: rgba(0, 114, 138, 0.1); /* Very faint teal tint */
+  color: var(--lp-aqua-island);
+  border-bottom: 2px solid var(--lp-border);
+}
+
+/* 4. Column specific widths to prevent "stretched" looks */
+/* Departure/Arrival Stations */
+.trip-table td:nth-child(1),
+.trip-table td:nth-child(3) {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds ... if station name is too long */
+  white-space: nowrap;
+}
+
+/* Date columns - give them exactly what they need and no more */
+.trip-table th:nth-child(2), 
+.trip-table th:nth-child(4),
+.trip-table td:nth-child(2),
+.trip-table td:nth-child(4) {
+  width: 140px; 
+  white-space: nowrap;
+}
+
+.trip-table tbody tr {
+background-color: transparent;
+  border-bottom: 1px solid var(--lp-border);
+}
+
+.trip-table tbody tr:hover {
+  background-color: rgba(43, 176, 136, 0.05);
+  transform: translateY(-1px);
+  box-shadow: none;
+  z-index: 2;
+}
+
+/* Pagination Buttons */
+.pagination button {
+  background-color: var(--lp-surface);
+  border: 1px solid var(--lp-jungle-green);
+  color: var(--lp-jungle-green);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--lp-jungle-green);
+  color: var(--lp-bg-dark);
+}
+
+.pagination button:disabled {
+  border-color: var(--lp-border);
+  color: var(--lp-text-muted);
+}
+
+/* Status Badges - Pill Shape */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px; /* Fully rounded pill */
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.status-badge.completed {
+  background-color: rgba(43, 176, 136, 0.15); /* Faint green glow */
+  color: #2BB088;
+  border: 1px solid rgba(43, 176, 136, 0.3);
+}
+
+/* Incomplete - Amber/Warning */
+.status-badge.incomplete {
+  background-color: rgba(245, 158, 11, 0.15); /* Amber glow */
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Cancelled - Muted Red/Grey */
+.status-badge.cancelled {
+  background-color: rgba(239, 68, 68, 0.15); /* Red glow */
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Update the Trip Cards to match */
+.trip-table tr {
+  background: var(--white);
+  border: 1px solid var(--medium-cyan);
+}
+
+/* The label 'data-label' color */
+.trip-table td::before {
+  color: var(--primary-cyan) !important;
+}
+
+/* Status Badge - make it smaller */
+.status-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  min-width: 70px;
+}
+
+body {
+  background-color: var(--lp-bg-dark);
+  color: var(--lp-text-main);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--lp-dark-slate) !important; /* Dark professional background */
+  border-bottom: 3px solid var(--lp-jungle-green); /* The signature green accent line */
+  padding: 1.2rem 2rem;
+  gap: 15px; /* Ensures a gap between Logo and User Info */
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* CRITICAL: Allows the container to shrink */
+  min-width: 0; 
+  flex-shrink: 1; 
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* This is the critical fix for the overflow */
+  max-width: 150px; /* Limits the width on mobile */
+  min-width: 0;
+}
+
+.welcome-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--lp-white);
+  font-family: 'Inter', sans-serif; /* Littlepay uses clean sans-serif */
+  letter-spacing: -0.01em;
+  
+  /* ELLIPSIS LOGIC */
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /* Restrict width so it doesn't push the logout link away */
+  max-width: 150px; 
+  text-align: right;
+}
+
+.logout-link {
+  color: var(--lp-aqua-island);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.logout-link:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+/* Ensure your main content doesn't hide behind the sticky nav */
+.main-content {
+  padding: 2rem;
+}
+
+/* Trip Table - "Clean Fintech" look */
+.trip-table thead tr {
+  background-color: transparent;
+}
+
+/* Target specific small window constraints */
+@media screen and (max-width: 975px), screen and (max-height: 650px) {
+  
+  .navbar {
+    overflow: hidden; /* This is the "shield" */
+    white-space: nowrap; /* Prevents text from wrapping to a second line */
+  }
+
+  .nav-right {
+    flex-shrink: 1;
+    min-width: 0; /* Allows the container to actually get smaller */
+  }
+
+  .user-profile {
+    overflow: hidden; /* Hides any part of the name that overflows */
+    text-overflow: clip; /* Just cuts it off (use 'ellipsis' for "...") */
+    max-width: 120px; /* Limits how much space the name can take */
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .account-cell {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Still nice to have the "..." in the table */
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+
+  .user-profile {
+    max-width: 300px; /* Allow more room on desktop */
+  }
+  
+  .welcome-text {
+    max-width: 100px; /* Even tighter for small phones */
+  }
+
+  .trip-table {
+    min-width: 100%; 
+  }
+
+  .trip-table td {
+    display: grid !important;
+    grid-template-columns: 100px 1fr;
+    column-gap: 12px;
+    align-items: center;
+    padding: 10px 12px !important;
+    overflow: hidden;
+  }
+
+  /* Target the station name values */
+  .trip-table td[data-label="Dept."],
+  .trip-table td[data-label="Dest."],
+  .account-cell {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 180px; /* Adjust this number to fit your screen */
+  }
+}
