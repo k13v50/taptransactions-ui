@@ -15,28 +15,31 @@ const Login = ({ onLoginSuccess }) => {
     try {
       const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: username }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }), 
       });
 
       if (!response.ok) {
-        throw new Error('Invalid username or server error.');
+        if (response.status === 401 || response.status === 404) {
+          throw new Error('Invalid login. User not recognized.');
+        }
+        throw new Error('Server error. Please try again later.');
       }
 
       const data = await response.json();
+      localStorage.setItem('token', data.token);
       
-      // If your backend returns a token, store it
-      if (data.token) {
-        localStorage.setItem('token', data.token);
+      // CRITICAL: Call the success prop to update the main App state
+      if (onLoginSuccess) {
+        onLoginSuccess(data.user || username); 
       }
 
-      // Call the parent function passed via props
-      onLoginSuccess(username);
-      
     } catch (err) {
-      setError(err.message);
+      if (err.name === 'TypeError' || err.message.includes('fetch')) {
+        setError('Connection failed. Unable to connect to server.');
+      } else {
+        setError(err.message);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -45,25 +48,22 @@ const Login = ({ onLoginSuccess }) => {
   return (
     <div className="login-page">
       <div className="login-container">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <h2>User Login</h2>
-          
-          {error && <p className="error-message">{error}</p>}
-          
-          <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              disabled={isLoading}
-              required
-            />
-          </div>
-          
+        <h2 style={{ color: 'var(--lp-jungle-green)' }}>TapSystem Portal</h2>
+        
+        {error && <div className="login-error-msg">{error}</div>}
+
+        {/* CHANGED handleLogin to handleSubmit */}
+        <form onSubmit={handleSubmit}>
+          <input 
+            type="text" 
+            placeholder="Enter Username or ID" 
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            disabled={isLoading}
+            required
+          />
           <button type="submit" className="login-button" disabled={isLoading}>
-            {isLoading ? 'Connecting...' : 'Login'}
+            {isLoading ? 'Connecting...' : 'Access Dashboard'}
           </button>
         </form>
       </div>

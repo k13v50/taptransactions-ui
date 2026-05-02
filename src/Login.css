@@ -49,3 +49,21 @@
 .login-button:hover {
   opacity: 0.9;
 }
+
+.login-error-msg {
+  background-color: rgba(239, 68, 68, 0.1); /* Faint red glow */
+  color: #f87171; /* Soft red text */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  animation: shake 0.4s ease-in-out; /* Subtle attention grabber */
+}
+
+/* Optional: Shake animation when error appears */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}

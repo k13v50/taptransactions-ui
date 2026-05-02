@@ -176,7 +176,7 @@ body {
   background-color: var(--lp-dark-slate) !important; /* Dark professional background */
   border-bottom: 3px solid var(--lp-jungle-green); /* The signature green accent line */
   padding: 1.2rem 2rem;
-  gap: 15px; /* Ensures a gap between Logo and User Info */
+  gap: 15px;
 }
 .nav-left {
   display: flex;
@@ -196,27 +196,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* This is the critical fix for the overflow */
-  max-width: 150px; /* Limits the width on mobile */
   min-width: 0;
+  /* Remove or increase the max-width for full screen */
+  max-width: 400px; 
 }
 
 .welcome-text {
   font-weight: 600;
   font-size: 0.9rem;
-  color: var(--lp-white);
-  font-family: 'Inter', sans-serif; /* Littlepay uses clean sans-serif */
-  letter-spacing: -0.01em;
-  
-  /* ELLIPSIS LOGIC */
-  display: block;
-  width: 100%;
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
-  /* Restrict width so it doesn't push the logout link away */
-  max-width: 150px; 
+  /* Allow more room on full screen */
+  max-width: 100%; 
   text-align: right;
 }
 
@@ -305,5 +298,15 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 180px; /* Adjust this number to fit your screen */
+  }
+}
+
+@media screen and (max-width: 975px), screen and (max-height: 650px) {
+  .user-profile {
+    max-width: 120px; /* This is where the masking happens */
+  }
+  
+  .welcome-text {
+    max-width: 120px;
   }
 }

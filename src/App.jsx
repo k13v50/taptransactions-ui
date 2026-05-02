@@ -44,7 +44,7 @@ function App() {
         <>
           <nav className="navbar">
             <div className="nav-left">
-              <h2 style={{ color: 'white', margin: 0 }}>TapSystem</h2>
+              <h2 style={{ color: 'white', margin: 0 }}>TapSystem Portal</h2>
             </div>
 
             <div className="nav-right">
