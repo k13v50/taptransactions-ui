@@ -136,6 +136,13 @@ background-color: transparent;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
+.status-badge::before {
+  content: '●';
+  margin-right: 6px;
+  font-size: 0.6rem;
+  vertical-align: middle;
+}
+
 /* Update the Trip Cards to match */
 .trip-table tr {
   background: var(--white);
