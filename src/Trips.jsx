@@ -62,7 +62,7 @@ const TripList = () => {
     const token = localStorage.getItem('token');
     const sortParam = `${sortConfig.key},${sortConfig.direction}`;
     
-    let url = `http://localhost:8080/trips?page=${currentPage}&size=${pageSize}&sort=${sortParam}`;
+    let url = `http://localhost:8080/little-trips/api/v1/trips?page=${currentPage}&size=${pageSize}&sort=${sortParam}`;
     
     if (activeFilters.value) {
       url += `&${activeFilters.category}=${encodeURIComponent(activeFilters.value)}`;
